@@ -36,6 +36,7 @@
     resultsLimit: null,
 
     enableHTML: false,
+    clientSideCache: true,
 
     resultsFormatter: function(item) {
       var string = item[this.propertyToSearch];
@@ -972,7 +973,7 @@
       function run_search(query) {
           var cache_key = query + computeURL();
           var cached_results = cache.get(cache_key);
-          if (cached_results) {
+          if (settings.clientSideCache && cached_results) {
               if ($.isFunction($(input).data("settings").onCachedResult)) {
                 cached_results = $(input).data("settings").onCachedResult.call(hiddenInput, cached_results);
               }
